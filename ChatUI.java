@@ -58,6 +58,7 @@ public class ChatUI {
 				frame.setVisible(true);
 			}
 		});
+
 	}
 
 	public void appendText(String message) {
@@ -65,9 +66,9 @@ public class ChatUI {
 
 			@Override
 			public void run() {
-				chatText.append("They: " + message +"\n");				
+				chatText.append("They: " + message +"\n");
 			}
-		
+
 	});
 	}
 }

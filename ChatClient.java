@@ -7,21 +7,24 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.net.Socket;
 
-public class ChatClient {
-	
-	public static void main(String[] args) throws IOException {
-		Socket s = new Socket("127.0.0.1", 10011);
-		
-		BufferedReader input = new BufferedReader(new InputStreamReader(s.getInputStream()));
-		Writer output = new OutputStreamWriter(s.getOutputStream());
-		
-		ChatUI theUI = new ChatUI("Client End", output);
-		
-		String line;
-		while ((line = input.readLine()) != null) {
-			theUI.appendText(line);
+public class ChatClient extends Thread {
+
+	@Override
+	public void run() {
+		try {
+			Socket socket = new Socket("127.0.0.1", 10011);
+			BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+			Writer output = new OutputStreamWriter(socket.getOutputStream());
+			ChatUI theUI = new ChatUI("Client End", output);
+			String line;
+			while ((line = input.readLine()) != null) {
+				theUI.appendText(line);
+			}
+			theUI.appendText("Connection lost");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		theUI.appendText("Connection lost");
 	}
 }
 
