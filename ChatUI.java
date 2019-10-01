@@ -19,6 +19,12 @@ public class ChatUI {
 	private JTextArea chatText;
 	private JTextField entryText;
 
+	// Variables for window size and placement
+	private int width = 300;
+	private int height = 300;
+	private int padding = 20;
+	private static int counter = 0;
+
 	public ChatUI(String title, Writer output) {
 
 		SwingUtilities.invokeLater(new Runnable() {
@@ -54,8 +60,9 @@ public class ChatUI {
 
 				frame.add(entryText, BorderLayout.SOUTH);
 
-				frame.setBounds(20, 20, 300, 300);
+				frame.setBounds(padding + (width * counter), 20, width, height);
 				frame.setVisible(true);
+				counter ++;
 			}
 		});
 

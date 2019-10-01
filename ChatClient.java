@@ -18,11 +18,15 @@ public class ChatClient extends Thread {
 			ChatUI theUI = new ChatUI("Client End", output);
 			String line;
 			while ((line = input.readLine()) != null) {
+				sleep(500);
 				theUI.appendText(line);
 			}
-			theUI.appendText("Connection lost");
+			theUI.appendText("Client Connection lost");
 			socket.close();
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
